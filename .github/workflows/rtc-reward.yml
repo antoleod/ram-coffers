@@ -1,23 +1,11 @@
-name: RTC Reward on PR Merge
+name: rtc-reward.yml (DISABLED - billing protection)
 on:
-  pull_request_target:
-    types: [closed]
-
+  workflow_dispatch:
 permissions:
   contents: read
-  issues: write
-  pull-requests: write
-
 jobs:
-  reward:
-    if: github.event.pull_request.merged == true
+  disabled:
+    if: ${{ false }}
     runs-on: ubuntu-latest
     steps:
-      - name: Award RTC to contributor
-        continue-on-error: true  # rewards are best-effort; never gate CI
-        uses: Scottcjn/rustchain-bounties/actions/rtc-reward@0de7a37bebfefde4f0c4baeebc3a17ffd1ba76e3 # pinned 2026-09-03 (was @main)
-        with:
-          node-url: https://50.28.86.131
-          amount: 5
-          wallet-from: founder_community
-          admin-key: ${{ secrets.RTC_ADMIN_KEY }}
+      - run: echo 'Disabled by repository owner to prevent GitHub Actions charges'
